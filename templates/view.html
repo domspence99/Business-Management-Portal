@@ -1,0 +1,129 @@
+{% extends "format.html"%}
+
+{% block title %}
+View Job
+{% endblock %}
+
+{% block main %}
+<h1 class="display-6">Job: {{ job_id }}</h1>
+
+
+<div class="container text-start">
+    <div class="shadow p-3 mb-5 bg-body rounded">
+        <form class="row g-3 needs-validation" novalidate action="/view/{{job_id}}" method="post">
+            <div class="col-md-4">
+              <label for="job_number" class="form-label">Job Number</label>
+              <input type="text" class="form-control" id="job_number" name="job_number" value="{{job_info['job_number']}}" required onkeyup="listener()">
+              <div class="invalid-feedback">
+                Please enter a job number.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="date" class="form-label">Date</label>
+              <input type="text" class="form-control" id="date" value="{{job_info['date']}}" name="date" required onkeyup="listener()">
+              <div class="invalid-feedback">
+                Please enter the date you receieved job.
+              </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+              <label for="customer" class="form-label">Customer</label>
+              <input type="text" class="form-control" id="customer" value="{{job_info['shop']}}" name="customer" required onkeyup="listener()">
+              <div class="invalid-feedback">
+                Please provide a customer name.
+              </div>
+            </div>
+            <div class="col-md-8">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" value="{{job_info['address']}}" name="address" required onkeyup="listener()">
+                <div class="invalid-feedback">
+                  Please provide an address.
+                </div>
+              </div>
+            <div class="col-md-3">
+            </div>
+            <div class="col-12">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" placeholder="Description of works" name="description" required onkeyup="listener()">{{job_info['description']}}</textarea>
+                <div class="invalid-feedback">
+                  Please provide a description of works.
+                </div>
+            </div>
+            <div class="col-md-4">
+              <label for="status" class="form-label">Status</label>
+              <select class="form-select" id="status" name="status" required onchange="listener()">
+                <option disabled selected>-</option>
+                <option value="Active" {% if job_info.status == "Active" %} selected="selected"{% endif %}>Active</option>
+                <option value="Hold" {% if job_info.status == "Hold" %} selected="selected"{% endif %}>Hold</option>
+                <option value="Completed" {% if job_info.status == "Completed" %} selected="selected"{% endif %}>Completed</option>
+                <option value="Awaiting materials" {% if job_info.status == "Awaiting materials" %} selected="selected"{% endif %}>Awaiting materials</option>
+                <option value="Awaiting access" {% if job_info.status == "Awaiting access" %} selected="selected"{% endif %}>Awaiting access</option>
+                <option value="Cancelled" {% if job_info.status == "Cancelled" %} selected="selected"{% endif %}>Cancelled</option>
+                <option value="Installs Mood" {% if job_info.status == "Installs Mood" %} selected="selected"{% endif %}>Installs Mood</option>
+                <option value="Installs Ireland" {% if job_info.status == "Installs Ireland" %} selected="selected"{% endif %}>Installs Ireland</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select job status.
+              </div>
+            </div>
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4">
+              <label for="person" class="form-label">Assignment</label>
+              <input type="text" class="form-control" id="person" name="person" placeholder="Name" value="{{job_info['person']}}" onkeyup="listener()">
+            </div>
+            <div class="col-md-4">
+              <label for="visit" class="form-label">Date of visit</label>
+              <input type="text" class="form-control" id="visit" name="visit" placeholder="dd/mm/yyyy" value="{{job_info['planned_visit']}}" onkeyup="listener()">
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit">Close</button>
+              <button class="btn btn-primary" type="submit" id="save" name="save" value="saved" formmethod="post"  disabled>Save</button>
+            </div>
+          </form>
+        </div>
+  </div>
+  <script>
+    function listener(){
+
+      // NOT COMPLETE
+      //Aim: Enable save button when and only when there is a change in value between original and new user value
+      //1. Compare default with new values
+      //Q? How to find .default value of select/options list
+      var job_number = document.getElementById("job_number").defaultValue
+      var date = document.getElementById("date").defaultValue
+      var customer = document.getElementById("customer").defaultValue
+      var address = document.getElementById("address").defaultValue
+      var description = document.getElementById("description").defaultValue
+      var status = document.getElementById("status").defaultSelected
+      var person = document.getElementById("person").defaultValue
+      var visit = document.getElementById("visit").defaultValue
+
+      var altered_job_number = document.getElementById("job_number")
+      var altered_date = document.getElementById("date")
+      var altered_customer = document.getElementById("customer")
+      var altered_address = document.getElementById("address")
+      var altered_description = document.getElementById("description")
+      var altered_status = document.getElementById("status")
+      var altered_person = document.getElementById("person")
+      var altered_visit = document.getElementById("visit")
+
+      //alert("Default: " + status + " New: " + altered_status.value)
+      //FIND HOW TO GET DEFAULT VALUE OF SELECT/OPTIONS
+      //alert(document.getElementById("select").options.length);
+
+
+     //for(var i=0; i < status.options.length; i++)
+     //{
+       //alert(status.options[status.selectedIndex].value) //ONLY returns the first selected element!
+     //}
+
+
+      save = document.getElementById("save")
+      save.disabled = false;
+    }
+  </script>
+
+
+{% endblock %}

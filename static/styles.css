@@ -1,0 +1,65 @@
+:root {
+    --DMS: #272649;
+    --DMS_opac: rgb(39,38,73,0.55);
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
+.title{
+    color: var(--DMS) !important;
+}
+
+.title-links{
+    color: var(--DMS_opac) !important;
+}
+
+.help-block {
+    color:red;
+}
+
+.has-error .form-control {
+    border: 1px solid red;
+}
+
+table{
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+table th {
+    background-color: var(--DMS);
+    color: white;
+}
+
+table td {
+    background-color: light;
+    font-size: 12px;
+}
+
+table, th, td {
+    border: 1px solid;
+  }
+
+.table-wrapper{
+    width:110px; /*fixed width, so if the window is resized (zoomed in/out), it won't break*/
+    height:40px;
+}
+
+.sticky-header{
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+.index-table{
+    height: 600px;
+    overflow: auto;
+}
+
+textarea {
+    height:100px;
+}

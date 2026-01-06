@@ -1,0 +1,100 @@
+{% extends "format.html" %}
+
+{% block main %}
+<div class="container text-start">
+  <div class="shadow p-3 mb-5 bg-body rounded">
+      <form class="row g-3 needs-validation" novalidate action="/add" method="post">
+          <div class="col-md-4">
+            <label for="job_number" class="form-label">Job Number</label>
+            <input type="text" class="form-control" id="job_number" name="job_number" placeholder="e.g 221222-000123" required>
+            <div class="invalid-feedback">
+              Please enter a job number.
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="date" class="form-label">Date</label>
+            <input type="text" class="form-control" id="date" placeholder="dd/mm/yyyy" name="date" required>
+            <div class="invalid-feedback">
+              Please enter the date you receieved job.
+            </div>
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+            <label for="customer" class="form-label">Customer</label>
+            <input type="text" class="form-control" id="customer" placeholder="e.g Costa Coffee" name="customer" required>
+            <div class="invalid-feedback">
+              Please provide a customer name.
+            </div>
+          </div>
+          <div class="col-md-8">
+              <label for="address" class="form-label">Address</label>
+              <input type="text" class="form-control" id="address" placeholder="e.g 2 Main Street, Castleford" name="address" required>
+              <div class="invalid-feedback">
+                Please provide an address.
+              </div>
+            </div>
+          <div class="col-md-3">
+          </div>
+          <div class="col-12">
+              <label for="description" class="form-label">Description</label>
+              <textarea class="form-control" id="description" placeholder="Description of works" name="description" required></textarea>
+              <div class="invalid-feedback">
+                Please provide a description of works.
+              </div>
+          </div>
+          <div class="col-md-4">
+            <label for="status" class="form-label">Status</label>
+            <select class="form-select" id="status" name="status" required>
+              <option selected disabled value="">-</option>
+              <option value="Active">Active</option>
+              <option value="Hold">Hold</option>
+              <option value="Completed">Completed</option>
+              <option value="Awaiting materials">Awaiting materials</option>
+              <option value="Awaiting access">Awaiting access</option>
+              <option value="Cancelled">Cancelled</option>
+              <option value="Installs Mood">Installs Mood</option>
+              <option value="Installs Ireland">Installs Ireland</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select job status.
+            </div>
+          </div>
+          <div class="col-md-8">
+          </div>
+          <div class="col-md-4">
+            <label for="person" class="form-label">Assignment</label>
+            <input type="text" class="form-control" id="person" name="person" placeholder="Name">
+          </div>
+          <div class="col-md-4">
+            <label for="visit" class="form-label">Date of visit</label>
+            <input type="text" class="form-control" id="visit" name="visit" placeholder="dd/mm/yyyy">
+          </div>
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">Add Job</button>
+          </div>
+        </form>
+      </div>
+</div>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+        }, false)
+    })
+    })()
+</script>
+{% endblock %}

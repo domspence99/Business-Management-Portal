@@ -1,0 +1,23 @@
+{% extends "format.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block title %}
+Log in
+{% endblock %}
+
+{% block main %}
+<div class="container" style="width:30%">
+    <form class="form-signin needs-validation" novalidate action="/login" method="post">
+        <div class="mb-3">
+        {{ form.hidden_tag() }} <!--Cross site request forgery (CSRF) token requirement-->
+        {{ wtf.form_field(form.username) }}
+        {{ wtf.form_field(form.password) }}
+        {% if log_in_validation == False %}
+            <div class="help-block">Username or password incorrect</div>
+        {% endif %}
+        <button id="register" class="btn btn-primary mt-2" type="submit">Log In</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

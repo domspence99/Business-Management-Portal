@@ -1,0 +1,76 @@
+{% extends "format.html" %}
+
+
+{% block title %}
+DMS
+{% endblock %}
+
+{% block main %}
+<div class="text-center">
+    <div class="row align-items-end">
+        <div class="col"></div>
+        <div class="col"><h1>Active Jobs</h1></div>
+        <div class="col text-end"><p><a href="/add" style="text-decoration:none;color:inherit;">Add a job here <i class="fa-solid fa-file-circle-plus" style="color:#212529;"></i></a></p> </div>
+    </div>
+</div>
+<div class="index-table">
+    <table >
+        <thead>
+            <tr class="sticky-header">
+                <th>Date</th>
+                <th>Job No.</th>
+                <th>Shop</th>
+                <th>Address</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Planned</th>
+                <th>Person</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+            <tr>
+                <td>{{ job["date"] }}</td>
+                <td>{{ job["job_number"] }}</td>
+                <td>{{ job["shop"] }}</td>
+                <td>{{ job["address"] }}</td>
+                <td>{{ job["description"] }}</td>
+                <td>
+                    <select class="form-select" aria-label="Status selector">
+                        <option disabled selected>-</option>
+                        <option value="Active" {% if job.status == "Active" %} selected="selected"{% endif %}>Active</option>
+                        <option value="Hold" {% if job.status == "Hold" %} selected="selected"{% endif %}>Hold</option>
+                        <option value="Completed" {% if job.status == "Completed" %} selected="selected"{% endif %}>Completed</option>
+                        <option value="Awaiting materials" {% if job.status == "Awaiting materials" %} selected="selected"{% endif %}>Awaiting materials</option>
+                        <option value="Awaiting access" {% if job.status == "Awaiting access" %} selected="selected"{% endif %}>Awaiting access</option>
+                        <option value="Cancelled" {% if job.status == "Cancelled" %} selected="selected"{% endif %}>Cancelled</option>
+                        <option value="Installs Mood" {% if job.status == "Installs Mood" %} selected="selected"{% endif %}>Installs Mood</option>
+                        <option value="Installs Ireland" {% if job.status == "Installs Ireland" %} selected="selected"{% endif %}>Installs Ireland</option>
+                      </select>
+                </td>
+                <td>{{ job["planned_visit"] }}</td>
+                <td>{{ job["person"] }}</td>
+                <input id="row_id" name="row_id" type="hidden" value="{{ job['id'] }}">
+                <td>
+                    <div class="table-wrapper mt-2 ms-auto me-auto mb-auto">
+                        <form action="/" method="post">
+                            <button class="btn btn-sm ms-auto" type="submit" name="view" value="{{ job['id'] }}" formmethod="post"><i class="fa-solid fa-eye"></i></button>
+                            <button class="btn btn-sm ms-auto" type="submit" name="edit" value="{{ job['id'] }}" formmethod="post"><i class="fa-regular fa-pen-to-square"></i></button>
+                            <button class="btn btn-sm ms-auto" type="submit" name="delete" value="{{ job['id'] }}" formmethod="post"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock%}
+
+
+CREATE TABLE jobs (id INTEGER NOT NULL, date DATETIME NOT NULL, job_number TEXT NOT NULL, shop TEXT NOT NULL, address TEXT NOT NULL, description TEXT NOT NULL, status TEXT NOT NULL, planned_visit TEXT, person TEXT, PRIMARY KEY(id));
+
+INSERT INTO jobs (job_number,date,shop,address,description, status, planned_visit, person) VALUES ("221204-000478","22/06/2022", "Boots", "LOW PAVEMENT CHESTERFIELD
+", "INSTALLED THE NEW PLAYER. THE PLAYER IS PLAYING BUT THE WHOLE AMPLIFICATION SYSTEM IS A MESS AND THE THERE IS NO IMPEDANCE READING ON ANY SPEAKER LINES.THE AMP IS ALSO SUSPECT. WE NEED 2 X MEN O.O.HOURS TO CHECK THE SPEAKER LINES OUT.WE WILL ALSO TAKE A SPARE AMP WITH US. PHOTOS IN THE APP", "Completed", "12/12/2022", "Dom");
